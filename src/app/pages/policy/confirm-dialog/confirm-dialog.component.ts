@@ -23,7 +23,7 @@ export class ConfirmDialogComponent implements OnInit {
   delete() {
     this.service.deletePolicy(this.data.idPoliza).subscribe({
       next: () => {
-        this.snackbar.open('Se ha sido eliminado correctamente la póliza');
+        this.snackbar.open('Se ha eliminado correctamente la póliza');
         this.dialogRef.close({
           data: true,
         });
