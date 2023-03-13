@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { Observable, tap } from 'rxjs';
+import { BehaviorSubject, Observable, tap } from 'rxjs';
 import { User } from './interfaces/user';
 import { UserLogin } from './interfaces/userLogin';
 
@@ -9,15 +9,25 @@ import { UserLogin } from './interfaces/userLogin';
   providedIn: 'root',
 })
 export class LoginService {
+  private _userInfo = new BehaviorSubject<UserLogin | null>(null);
   private API_URL = 'http://localhost:8080';
 
   constructor(private http: HttpClient, private router: Router) {}
+
+  get user$() {
+    return this._userInfo.asObservable();
+  }
+
+  user(value: UserLogin | null) {
+    this._userInfo.next(value);
+  }
 
   login(user: User): Observable<UserLogin> {
     return this.http.post<UserLogin>(`${this.API_URL}/login`, user).pipe(
       tap({
         next: (response) => {
           this.saveSession(response);
+          this.user(response);
         },
       })
     );
@@ -53,5 +63,6 @@ export class LoginService {
 
   removeSession() {
     localStorage.removeItem('user_info');
+    this.router.navigateByUrl('/login');
   }
 }
