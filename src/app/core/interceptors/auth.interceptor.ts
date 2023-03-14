@@ -40,7 +40,7 @@ export class AuthInterceptor implements HttpInterceptor {
       catchError((err: HttpErrorResponse) => {
         if (err.status === 404) {
           //this.router.navigate(['/pages/not-found']);
-        } else if (err.status === 401) {
+        } else if (err.status === 401 || err.status === 403) {
           this.sessionService.removeSession();
           this.router.navigate(['/login']);
         }
