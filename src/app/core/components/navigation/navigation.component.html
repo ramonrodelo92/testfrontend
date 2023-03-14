@@ -14,7 +14,7 @@
           <mat-icon>article</mat-icon> <span>Pólizas</span>
         </div>
       </a>
-      <a mat-list-item routerLink="inventory" class="flex items-center gap-2">
+      <a mat-list-item routerLink="/policy" class="flex items-center gap-2">
         <div class="flex items-center gap-2">
           <mat-icon>inventory</mat-icon> <span>Inventario</span>
         </div>
@@ -35,8 +35,10 @@
       <div class="flex items-center justify-between w-full">
         <span>Logo</span>
         <div class="flex items-center gap-2">
-          <!-- <mat-icon class="mr-1">person</mat-icon>
-          <p>{{ user.email }}</p> -->
+          <ng-container *ngIf="source.user$ | async as user">
+            <mat-icon class="mr-1">person</mat-icon>
+            <p style="margin: 0px">{{ user.email }}</p>
+          </ng-container>
           <button mat-icon-button (click)="exit()">
             <mat-icon>logout</mat-icon>
           </button>

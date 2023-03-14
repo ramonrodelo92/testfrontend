@@ -1,5 +1,7 @@
 <div class="mt-5">
-  <div class="flex items-center justify-end p-5">
+  <div class="flex items-center p-5 w-full">
+    <h1 style="margin: 0px">Pólizas</h1>
+    <div class="flex-1"></div>
     <button mat-raised-button color="primary" (click)="openDialog()">
       <mat-icon>add</mat-icon> Agregar Póliza
     </button>
@@ -69,5 +71,13 @@
 
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
     <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+    <tr class="mat-row" *matNoDataRow>
+      <td
+        class="mat-cell text-center font-bold"
+        [attr.colspan]="displayedColumns.length"
+      >
+        No hay información para mostrar
+      </td>
+    </tr>
   </table>
 </div>

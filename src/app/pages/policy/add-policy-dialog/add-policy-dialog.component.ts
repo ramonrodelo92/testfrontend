@@ -49,8 +49,6 @@ export class AddPolicyDialogComponent implements OnInit {
 
   private _filter(value: string): Empleado[] {
     const filterValue = (value as any)?.toLowerCase();
-    console.log({ filterValue });
-
     return this.employees?.filter((option) =>
       option.nombre.toLowerCase().includes(filterValue)
     );
@@ -88,7 +86,10 @@ export class AddPolicyDialogComponent implements OnInit {
 
   buildForm() {
     this.form = this.fb.group({
-      sku: new FormControl(null, Validators.required),
+      sku: new FormControl(
+        { value: null, disabled: this.data?.isEdit },
+        Validators.required
+      ),
       cantidad: new FormControl(null, [Validators.required, Validators.min(0)]),
     });
   }

@@ -13,8 +13,8 @@ export class IsLoggedInGuard implements CanActivate {
     if (token?.access_token) {
       this.router.navigate(['/']);
       return false;
-    } else {
-      return true;
     }
+    
+    return true;
   }
 }
